@@ -38,5 +38,20 @@ class GoogleMapsApi():
         post_result = HttpMethods.post(post_url, new_place_info)
         print(post_result.text)
 
-        # Возвращаем значение
+        # Возвращаем значение метода POST
         return post_result
+
+    # Создаем статичный метод GET
+    @staticmethod
+    def get_new_place(place_id):
+        # Собираем url и печатаем его
+        get_path = '/maps/api/place/get/json'
+        get_url = base_url + get_path + key + "&place_id=" + place_id
+        print(f'full GET path: {get_url}')
+
+        # Делаем запрос с кастомным методом GET, печатаем получившийся текст
+        get_result = HttpMethods.get(get_url)
+        print(get_result.text)
+
+        # Возвращаем значение метода GET
+        return get_result

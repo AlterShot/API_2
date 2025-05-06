@@ -1,7 +1,8 @@
 # Импортируем библиотеки
 from requests import Response
-from utils.status_code import StatusCodeChecking
+
 from utils.api import GoogleMapsApi
+from utils.status_code import StatusCodeChecking
 
 
 # Создаем класс для тестов
@@ -36,7 +37,7 @@ class TestCreatePlace:
         print('PUT method')
 
         # Выполняем запрос PUT
-        put_result : Response = GoogleMapsApi.put_new_place(place_id)
+        put_result: Response = GoogleMapsApi.put_new_place(place_id)
 
         # Проверяем статус-код запроса PUT
         StatusCodeChecking.status_code_check(put_result, 200)

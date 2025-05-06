@@ -55,3 +55,26 @@ class GoogleMapsApi():
 
         # Возвращаем значение метода GET
         return get_result
+
+    # Создаем статичный метод PUT
+    @staticmethod
+    def put_new_place(place_id):
+
+        # Создаем переменную для обновления данных
+        put_place_info = {
+            "place_id" : place_id,
+            "address" : "100 Lenina street, RU",
+            "key" : "qaclick123"
+        }
+
+        # Собираем url и печатаем его
+        put_path = '/maps/api/place/update/json'
+        put_url = base_url + put_path + key
+        print(f'full PUT path: {put_url}')
+
+        # Вызываем кастомный метод PUT, печатаем получившийся текст
+        put_result = HttpMethods.put(put_url, put_place_info)
+        print(put_result.text)
+
+        # Возвращаем значение метода PUT
+        return put_result

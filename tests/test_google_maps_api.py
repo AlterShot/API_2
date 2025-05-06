@@ -20,8 +20,21 @@ class TestCreatePlace:
         # Получаем из нее place_id
         place_id = post_result_json.get('place_id')
 
-        # Печатаем, что идет метод GET
-        print('GET method')
+        # Печатаем, что идет метод GET после POST
+        print('GET POST method')
 
-        # Выполняем метод GET
+        # Выполняем метод GET после POST
         get_result: Response = GoogleMapsApi.get_new_place(place_id)
+
+        # Печатаем, что идет метод PUT
+        print('PUT method')
+
+        # Выполняем запрос PUT
+        put_result : Response = GoogleMapsApi.put_new_place(place_id)
+
+        # Повторяем метод GET после PUT
+        print('GET PUT method')
+
+        # Выполняем метод GET после PUT
+        get_result: Response = GoogleMapsApi.get_new_place(place_id)
+

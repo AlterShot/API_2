@@ -38,3 +38,14 @@ class TestCreatePlace:
         # Выполняем метод GET после PUT
         get_result: Response = GoogleMapsApi.get_new_place(place_id)
 
+        # Печатаем, что идет метод DELETE
+        print('DELETE method')
+
+        # Выполняем запрос DELETE
+        delete_result: Response = GoogleMapsApi.delete_new_place(place_id)
+
+        # Показываем, что снова выполняем GET
+        print('GET DELETE method')
+
+        # Проверяем, удалилась ли локация с помощью GET
+        get_result: Response = GoogleMapsApi.get_new_place(place_id)

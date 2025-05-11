@@ -2,7 +2,7 @@
 from requests import Response
 
 from utils.api import GoogleMapsApi
-from utils.status_code import StatusCodeChecking
+from utils.check_stuff import CheckStuff
 
 
 # Создаем класс для тестов
@@ -22,7 +22,10 @@ class TestCreatePlace:
         place_id = post_result_json.get('place_id')
 
         # Проверяем статус-код запроса POST
-        StatusCodeChecking.status_code_check(post_result, 200)
+        CheckStuff.status_code_check(post_result, 200)
+
+        # Проверяем наличие всех обязательных полей запроса POST
+        CheckStuff.json_token_check(post_result, ['status', 'place_id', 'scope', 'reference', 'id'])
 
         # Печатаем, что идет метод GET после POST
         print('GET POST method')
@@ -31,7 +34,11 @@ class TestCreatePlace:
         get_result: Response = GoogleMapsApi.get_new_place(place_id)
 
         # Проверяем статус-код запроса GET после POST
-        StatusCodeChecking.status_code_check(get_result, 200)
+        CheckStuff.status_code_check(get_result, 200)
+
+        # Проверяем наличие всех обязательных полей запроса GET после POST
+        CheckStuff.json_token_check(get_result, ['location', 'accuracy', 'name',
+                                                 'phone_number', 'address', 'types', 'website', 'language'])
 
         # Печатаем, что идет метод PUT
         print('PUT method')
@@ -40,7 +47,10 @@ class TestCreatePlace:
         put_result: Response = GoogleMapsApi.put_new_place(place_id)
 
         # Проверяем статус-код запроса PUT
-        StatusCodeChecking.status_code_check(put_result, 200)
+        CheckStuff.status_code_check(put_result, 200)
+
+        # Проверяем наличие всех обязательных полей запроса PUT
+        CheckStuff.json_token_check(put_result,['msg'])
 
         # Повторяем метод GET после PUT
         print('GET PUT method')
@@ -49,7 +59,11 @@ class TestCreatePlace:
         get_result: Response = GoogleMapsApi.get_new_place(place_id)
 
         # Проверяем статус-код запроса GET после PUT
-        StatusCodeChecking.status_code_check(get_result, 200)
+        CheckStuff.status_code_check(get_result, 200)
+
+        # Проверяем наличие всех обязательных полей запроса GET после PUT
+        CheckStuff.json_token_check(get_result, ['location', 'accuracy', 'name',
+                                                 'phone_number', 'address', 'types', 'website', 'language'])
 
         # Печатаем, что идет метод DELETE
         print('DELETE method')
@@ -58,7 +72,10 @@ class TestCreatePlace:
         delete_result: Response = GoogleMapsApi.delete_new_place(place_id)
 
         # Проверяем статус-код запроса DELETE
-        StatusCodeChecking.status_code_check(delete_result, 200)
+        CheckStuff.status_code_check(delete_result, 200)
+
+        # Проверяем наличие всех обязательных полей запроса DELETE
+        CheckStuff.json_token_check(delete_result, ['status'])
 
         # Показываем, что снова выполняем GET
         print('GET DELETE method')
@@ -67,4 +84,10 @@ class TestCreatePlace:
         get_result: Response = GoogleMapsApi.get_new_place(place_id)
 
         # Проверяем статус-код запроса GET после DELETE
-        StatusCodeChecking.status_code_check(get_result, 404)
+        CheckStuff.status_code_check(get_result, 404)
+
+        # Проверяем наличие всех обязательных полей запроса GET после DELETE
+        CheckStuff.json_token_check(get_result, ['msg'])
+
+        # Печатаем, что все тесты прошли успешно
+        print("new location creation, refreshing and deleting testing is successful")

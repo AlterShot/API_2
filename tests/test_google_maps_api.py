@@ -28,7 +28,7 @@ class TestCreatePlace:
         CheckStuff.json_token_check(post_result, ['status', 'place_id', 'scope', 'reference', 'id'])
 
         # Проверяем точное совпадение по полю метода POST
-        CheckStuff.field_exact(post_result, 'status', 'OK')
+        CheckStuff.check_exact_field_phrase(post_result, 'status', 'OK')
 
         # Печатаем, что идет метод GET после POST
         print('GET POST method')
@@ -44,7 +44,7 @@ class TestCreatePlace:
                                                  'phone_number', 'address', 'types', 'website', 'language'])
 
         # Проверяем совпадение поля адреса в методе GET
-        CheckStuff.field_exact(get_result, 'address', '29, side layout, cohen 09')
+        CheckStuff.check_exact_field_phrase(get_result, 'address', '29, side layout, cohen 09')
 
         # Печатаем, что идет метод PUT
         print('PUT method')
@@ -59,7 +59,7 @@ class TestCreatePlace:
         CheckStuff.json_token_check(put_result, ['msg'])
 
         # Проверяем корректность статуса в методе PUT
-        CheckStuff.field_exact(put_result, 'msg', 'Address successfully updated')
+        CheckStuff.check_exact_field_phrase(put_result, 'msg', 'Address successfully updated')
 
         # Повторяем метод GET после PUT
         print('GET PUT method')
@@ -75,7 +75,7 @@ class TestCreatePlace:
                                                  'phone_number', 'address', 'types', 'website', 'language'])
 
         # Проверяем совпадение поля обновленного адреса в методе GET после PUT
-        CheckStuff.field_exact(get_result, 'address', '100 Lenina street, RU')
+        CheckStuff.check_exact_field_phrase(get_result, 'address', '100 Lenina street, RU')
 
         # Печатаем, что идет метод DELETE
         print('DELETE method')
@@ -90,7 +90,7 @@ class TestCreatePlace:
         CheckStuff.json_token_check(delete_result, ['status'])
 
         # Проверяем корректность сообщения в методе DELETE
-        CheckStuff.field_exact(delete_result, 'status', 'OK')
+        CheckStuff.check_exact_field_phrase(delete_result, 'status', 'OK')
 
         # Показываем, что снова выполняем GET
         print('GET DELETE method')
@@ -105,7 +105,7 @@ class TestCreatePlace:
         CheckStuff.json_token_check(get_result, ['msg'])
 
         # Проверяем на наличие слова в методе GET после DELETE
-        CheckStuff.field_partial(get_result, 'msg', 'failed')
+        CheckStuff.check_partial_field_phrase(get_result, 'msg', 'failed')
 
         # Печатаем, что все тесты прошли успешно
         print("new location creation, refreshing and deleting testing is successful")

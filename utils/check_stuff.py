@@ -14,10 +14,25 @@ class CheckStuff:
                                                      f"Must be {status_code}")
         print(f"Correct. Status code is {status_code}")
 
-
     # Создаем статичный метод для проверки наличия обязательных полей
     @staticmethod
     def json_token_check(response: Response, expected_value):
         token = json.loads(response.text)
         assert list(token) == expected_value, "Some field not present"
         print("Every field present")
+
+    # Создаем статичный метод для проверки совпадения содержания поля
+    @staticmethod
+    def field_exact(response: Response, field_name, message):
+        field_to_check = response.json()
+        msg_to_check = field_to_check.get(field_name)
+        assert msg_to_check == message, f"{field_name}\'s message incorrect"
+        print(f"{field_name}\'s message correct")
+
+    # Создаем статичный метод для проверки частичного совпадения поля по слову
+    @staticmethod
+    def field_partial(response: Response, field_name, word):
+        field_to_check = response.json()
+        word_to_check = field_to_check.get(field_name)
+        assert word in word_to_check, f"\'{word}\' is not present in {field_name}"
+        print(f"\'{word}\' is present in {field_name}")

@@ -6,7 +6,7 @@ from requests import Response
 
 
 # Создаем класс для логирования
-class Logger():
+class Logger:
     # Создаем переменную с путем для сохранения файла
     file_name = f"logs/log_{str(datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))}.log"
 

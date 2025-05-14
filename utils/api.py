@@ -3,7 +3,7 @@ from utils.http_methods import HttpMethods
 
 # Создаем нужные переменные
 base_url = 'https://rahulshettyacademy.com'
-key = '&key=qaclick123'
+key = '?key=qaclick123'
 
 
 # Создаем класс
